@@ -14,9 +14,31 @@
                 <button id="home-btn" class="btn btn-ghost">
                     <i class="fas fa-home"></i> 홈으로
                 </button>
-                <button id="share-btn" class="btn btn-outline">
-                    <i class="fas fa-share-alt"></i> 공유하기
-                </button>
+                <div class="share-dropdown">
+                    <button id="share-btn" class="btn btn-outline">
+                        <i class="fas fa-share-alt"></i> 공유하기
+                    </button>
+                    <div class="share-menu" id="share-menu">
+                        <button class="share-option" id="share-kakao">
+                            <i class="fas fa-comment"></i> 카카오톡
+                        </button>
+                        <button class="share-option" id="share-facebook">
+                            <i class="fab fa-facebook"></i> 페이스북
+                        </button>
+                        <button class="share-option" id="share-twitter">
+                            <i class="fab fa-twitter"></i> 트위터
+                        </button>
+                        <button class="share-option" id="share-instagram">
+                            <i class="fab fa-instagram"></i> 인스타그램
+                        </button>
+                        <button class="share-option" id="share-link">
+                            <i class="fas fa-link"></i> 링크 복사
+                        </button>
+                        <button class="share-option" id="share-image">
+                            <i class="fas fa-image"></i> 이미지 저장
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <div class="result-content">
@@ -103,7 +125,24 @@
                 window.location.href = 'index.html';
             });
 
-            document.getElementById('share-btn').addEventListener('click', shareResult);
+            // Share button functionality
+            document.getElementById('share-btn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleShareMenu();
+            });
+
+            // Close share menu when clicking outside
+            document.addEventListener('click', function() {
+                closeShareMenu();
+            });
+
+            // Share option event listeners
+            document.getElementById('share-kakao').addEventListener('click', shareToKakao);
+            document.getElementById('share-facebook').addEventListener('click', shareToFacebook);
+            document.getElementById('share-twitter').addEventListener('click', shareToTwitter);
+            document.getElementById('share-instagram').addEventListener('click', shareToInstagram);
+            document.getElementById('share-link').addEventListener('click', copyLinkToClipboard);
+            document.getElementById('share-image').addEventListener('click', saveResultImage);
             document.getElementById('save-result').addEventListener('click', saveResult);
         });
 
@@ -201,28 +240,152 @@
             });
         }
 
-        async function shareResult() {
-            const result = JSON.parse(localStorage.getItem('mbti_result'));
-            const shareData = {
-                title: `MBTI 테스트 결과: ${result.type} - ${result.title}`,
-                text: `나의 MBTI 성격 유형은 ${result.type}입니다!`,
-                url: window.location.href
-            };
+        function toggleShareMenu() {
+            const menu = document.getElementById('share-menu');
+            menu.classList.toggle('active');
+        }
 
-            if (navigator.share) {
-                try {
-                    await navigator.share(shareData);
-                } catch (err) {
-                    copyToClipboard(shareData.url);
-                }
+        function closeShareMenu() {
+            const menu = document.getElementById('share-menu');
+            menu.classList.remove('active');
+        }
+
+        function getShareData() {
+            const result = JSON.parse(localStorage.getItem('mbti_result'));
+            return {
+                title: `MBTI 테스트 결과: ${result.type} - ${result.title}`,
+                text: `나의 MBTI 성격 유형은 ${result.type}(${result.title})입니다! 당신도 테스트해보세요!`,
+                url: window.location.origin,
+                hashtags: 'MBTI,성격테스트,심리테스트'
+            };
+        }
+
+        function shareToKakao() {
+            const shareData = getShareData();
+            const message = `${shareData.text}\n\n${shareData.url}`;
+            
+            // 카카오톡 앱이 설치되어 있는 경우
+            if (/KAKAOTALK/i.test(navigator.userAgent)) {
+                window.location.href = `kakaotalk://share?text=${encodeURIComponent(message)}`;
             } else {
-                copyToClipboard(shareData.url);
+                // 웹 카카오톡 또는 클립보드 복사
+                copyToClipboard(message);
+                alert('메시지가 클립보드에 복사되었습니다. 카카오톡에서 붙여넣어 주세요!');
             }
+            closeShareMenu();
+        }
+
+        function shareToFacebook() {
+            const shareData = getShareData();
+            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareData.url)}&quote=${encodeURIComponent(shareData.text)}`;
+            window.open(facebookUrl, '_blank', 'width=600,height=400');
+            closeShareMenu();
+        }
+
+        function shareToTwitter() {
+            const shareData = getShareData();
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareData.text)}&url=${encodeURIComponent(shareData.url)}&hashtags=${shareData.hashtags}`;
+            window.open(twitterUrl, '_blank', 'width=600,height=400');
+            closeShareMenu();
+        }
+
+        function shareToInstagram() {
+            alert('인스타그램은 직접 링크 공유를 지원하지 않습니다. "이미지 저장" 기능을 이용해 결과 이미지를 저장한 후 인스타그램에 업로드해주세요!');
+            closeShareMenu();
+        }
+
+        function copyLinkToClipboard() {
+            const shareData = getShareData();
+            const fullMessage = `${shareData.text}\n\n${shareData.url}`;
+            copyToClipboard(fullMessage);
+            closeShareMenu();
+        }
+
+        function saveResultImage() {
+            const result = JSON.parse(localStorage.getItem('mbti_result'));
+            
+            // Canvas를 이용해 결과 이미지 생성
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = 600;
+            canvas.height = 800;
+            
+            // 배경 설정
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // 텍스트 스타일 설정
+            ctx.textAlign = 'center';
+            ctx.fillStyle = 'white';
+            
+            // 제목
+            ctx.font = 'bold 48px Arial';
+            ctx.fillText('MBTI 테스트 결과', canvas.width / 2, 100);
+            
+            // MBTI 타입
+            ctx.font = 'bold 72px Arial';
+            ctx.fillText(result.type, canvas.width / 2, 200);
+            
+            // 타입 이름
+            ctx.font = 'bold 32px Arial';
+            ctx.fillText(result.title, canvas.width / 2, 250);
+            
+            // 요약 (여러 줄로 나누기)
+            ctx.font = '24px Arial';
+            const words = result.summary.split(' ');
+            let line = '';
+            let y = 320;
+            
+            for (let i = 0; i < words.length; i++) {
+                const testLine = line + words[i] + ' ';
+                const metrics = ctx.measureText(testLine);
+                const testWidth = metrics.width;
+                
+                if (testWidth > 500 && i > 0) {
+                    ctx.fillText(line, canvas.width / 2, y);
+                    line = words[i] + ' ';
+                    y += 35;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line, canvas.width / 2, y);
+            
+            // 강점 표시
+            ctx.font = 'bold 28px Arial';
+            ctx.fillText('주요 강점', canvas.width / 2, y + 80);
+            
+            ctx.font = '20px Arial';
+            result.strengths.slice(0, 3).forEach((strength, index) => {
+                ctx.fillText(`• ${strength}`, canvas.width / 2, y + 120 + (index * 35));
+            });
+            
+            // URL 추가
+            ctx.font = '18px Arial';
+            ctx.fillText(window.location.origin, canvas.width / 2, canvas.height - 50);
+            
+            // 이미지 다운로드
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `MBTI_${result.type}_결과.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+            
+            closeShareMenu();
         }
 
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('링크가 클립보드에 복사되었습니다!');
+                alert('클립보드에 복사되었습니다!');
             }).catch(() => {
                 // 폴백: 텍스트 선택 방식
                 const textArea = document.createElement('textarea');
@@ -231,7 +394,7 @@
                 textArea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textArea);
-                alert('링크가 클립보드에 복사되었습니다!');
+                alert('클립보드에 복사되었습니다!');
             });
         }
 

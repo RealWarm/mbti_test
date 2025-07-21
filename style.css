@@ -354,6 +354,59 @@ body {
 .estj { background: linear-gradient(135deg, #e17055, #d63031); }
 .istj { background: linear-gradient(135deg, #636e72, #2d3436); }
 
+/* Share Dropdown Styles */
+.share-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.share-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.share-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.share-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    background: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+    text-align: left;
+}
+
+.share-option:hover {
+    background-color: #f8f9fa;
+}
+
+.share-option i {
+    width: 20px;
+    text-align: center;
+}
+
 .result-summary {
     font-size: 1.1rem;
     line-height: 1.8;
