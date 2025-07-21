@@ -119,9 +119,10 @@ class MBTITest {
         document.getElementById('progress-fill').style.width = `${progress}%`;
         document.getElementById('progress-text').textContent = `${this.currentQuestion + 1} / ${this.questions.length}`;
 
-        // Clear previous selections
+        // Clear previous selections and remove focus
         document.querySelectorAll('.option-btn').forEach(btn => {
             btn.classList.remove('selected');
+            btn.blur(); // Remove focus from buttons
         });
 
         // Show previous answer if exists
