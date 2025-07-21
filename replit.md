@@ -7,6 +7,7 @@ This is a web-based MBTI (Myers-Briggs Type Indicator) personality test applicat
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+User requested more professional and expert-level MBTI questions based on Carl Jung's psychological type theory.
 
 ## System Architecture
 
