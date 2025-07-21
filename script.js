@@ -156,6 +156,11 @@ class MBTITest {
         document.getElementById('next-btn').disabled = false;
 
         this.saveProgress();
+
+        // Auto advance to next question after a short delay
+        setTimeout(() => {
+            this.nextQuestion();
+        }, 300);
     }
 
     previousQuestion() {
@@ -197,34 +202,34 @@ class MBTITest {
                 if (question.dimension === 'EI') {
                     if (question.trait === 'E') {
                         scores.E += weight;
-                        scores.I += (5 - weight);
+                        scores.I += (6 - weight);
                     } else {
                         scores.I += weight;
-                        scores.E += (5 - weight);
+                        scores.E += (6 - weight);
                     }
                 } else if (question.dimension === 'SN') {
                     if (question.trait === 'S') {
                         scores.S += weight;
-                        scores.N += (5 - weight);
+                        scores.N += (6 - weight);
                     } else {
                         scores.N += weight;
-                        scores.S += (5 - weight);
+                        scores.S += (6 - weight);
                     }
                 } else if (question.dimension === 'TF') {
                     if (question.trait === 'T') {
                         scores.T += weight;
-                        scores.F += (5 - weight);
+                        scores.F += (6 - weight);
                     } else {
                         scores.F += weight;
-                        scores.T += (5 - weight);
+                        scores.T += (6 - weight);
                     }
                 } else if (question.dimension === 'JP') {
                     if (question.trait === 'J') {
                         scores.J += weight;
-                        scores.P += (5 - weight);
+                        scores.P += (6 - weight);
                     } else {
                         scores.P += weight;
-                        scores.J += (5 - weight);
+                        scores.J += (6 - weight);
                     }
                 }
             });
@@ -272,11 +277,9 @@ class MBTITest {
 
     getAnswerWeight(answer) {
         const weights = {
-            'strongly-disagree': 1,
-            'disagree': 2,
+            'disagree': 1,
             'neutral': 3,
-            'agree': 4,
-            'strongly-agree': 5
+            'agree': 5
         };
         return weights[answer] || 3;
     }
