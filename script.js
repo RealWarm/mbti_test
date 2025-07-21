@@ -194,42 +194,53 @@ class MBTITest {
         setTimeout(() => {
             const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
 
-            // Calculate scores based on answers
+            // Calculate scores based on answers with weights and reverse questions
             this.answers.forEach((answer, index) => {
                 const question = this.questions[index];
-                const weight = this.getAnswerWeight(answer);
+                let answerWeight = this.getAnswerWeight(answer);
+                const questionWeight = this.getQuestionWeight(question);
+                const isReverse = this.isReverseQuestion(question);
+                
+                // Apply reverse scoring if needed
+                if (isReverse) {
+                    answerWeight = 6 - answerWeight;
+                }
+                
+                // Apply question weight
+                const finalScore = answerWeight * questionWeight;
+                const oppositeScore = (6 - answerWeight) * questionWeight;
                 
                 if (question.dimension === 'EI') {
                     if (question.trait === 'E') {
-                        scores.E += weight;
-                        scores.I += (6 - weight);
+                        scores.E += finalScore;
+                        scores.I += oppositeScore;
                     } else {
-                        scores.I += weight;
-                        scores.E += (6 - weight);
+                        scores.I += finalScore;
+                        scores.E += oppositeScore;
                     }
                 } else if (question.dimension === 'SN') {
                     if (question.trait === 'S') {
-                        scores.S += weight;
-                        scores.N += (6 - weight);
+                        scores.S += finalScore;
+                        scores.N += oppositeScore;
                     } else {
-                        scores.N += weight;
-                        scores.S += (6 - weight);
+                        scores.N += finalScore;
+                        scores.S += oppositeScore;
                     }
                 } else if (question.dimension === 'TF') {
                     if (question.trait === 'T') {
-                        scores.T += weight;
-                        scores.F += (6 - weight);
+                        scores.T += finalScore;
+                        scores.F += oppositeScore;
                     } else {
-                        scores.F += weight;
-                        scores.T += (6 - weight);
+                        scores.F += finalScore;
+                        scores.T += oppositeScore;
                     }
                 } else if (question.dimension === 'JP') {
                     if (question.trait === 'J') {
-                        scores.J += weight;
-                        scores.P += (6 - weight);
+                        scores.J += finalScore;
+                        scores.P += oppositeScore;
                     } else {
-                        scores.P += weight;
-                        scores.J += (6 - weight);
+                        scores.P += finalScore;
+                        scores.J += oppositeScore;
                     }
                 }
             });
@@ -282,6 +293,14 @@ class MBTITest {
             'agree': 5
         };
         return weights[answer] || 3;
+    }
+
+    getQuestionWeight(question) {
+        return question.weight || 1;
+    }
+
+    isReverseQuestion(question) {
+        return question.reverse || false;
     }
 
     goHome() {
