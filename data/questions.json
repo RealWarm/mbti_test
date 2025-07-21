@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "text": "파티에서 새로운 사람들과 쉽게 대화를 시작한다.",
+    "dimension": "EI",
+    "trait": "E"
+  },
+  {
+    "id": 2,
+    "text": "혼자만의 시간을 가지는 것을 선호한다.",
+    "dimension": "EI",
+    "trait": "I"
+  },
+  {
+    "id": 3,
+    "text": "구체적인 사실과 세부사항에 주의를 기울인다.",
+    "dimension": "SN",
+    "trait": "S"
+  },
+  {
+    "id": 4,
+    "text": "가능성과 잠재력에 더 관심이 많다.",
+    "dimension": "SN",
+    "trait": "N"
+  },
+  {
+    "id": 5,
+    "text": "결정을 내릴 때 논리와 객관적 분석을 우선시한다.",
+    "dimension": "TF",
+    "trait": "T"
+  },
+  {
+    "id": 6,
+    "text": "다른 사람의 감정과 가치를 중요하게 생각한다.",
+    "dimension": "TF",
+    "trait": "F"
+  },
+  {
+    "id": 7,
+    "text": "계획을 세우고 체계적으로 일을 진행하는 것을 선호한다.",
+    "dimension": "JP",
+    "trait": "J"
+  },
+  {
+    "id": 8,
+    "text": "융통성 있게 상황에 맞춰 행동하는 것을 선호한다.",
+    "dimension": "JP",
+    "trait": "P"
+  },
+  {
+    "id": 9,
+    "text": "많은 사람들과 함께 있을 때 에너지를 얻는다.",
+    "dimension": "EI",
+    "trait": "E"
+  },
+  {
+    "id": 10,
+    "text": "깊이 생각할 수 있는 조용한 환경을 선호한다.",
+    "dimension": "EI",
+    "trait": "I"
+  },
+  {
+    "id": 11,
+    "text": "현실적이고 실용적인 해결책을 찾는다.",
+    "dimension": "SN",
+    "trait": "S"
+  },
+  {
+    "id": 12,
+    "text": "창의적이고 혁신적인 아이디어를 좋아한다.",
+    "dimension": "SN",
+    "trait": "N"
+  },
+  {
+    "id": 13,
+    "text": "비판적 사고와 분석적 접근을 중시한다.",
+    "dimension": "TF",
+    "trait": "T"
+  },
+  {
+    "id": 14,
+    "text": "화합과 조화를 이루는 것을 중요하게 생각한다.",
+    "dimension": "TF",
+    "trait": "F"
+  },
+  {
+    "id": 15,
+    "text": "마감일을 지키고 일정에 따라 행동한다.",
+    "dimension": "JP",
+    "trait": "J"
+  },
+  {
+    "id": 16,
+    "text": "즉흥적으로 행동하고 변화에 잘 적응한다.",
+    "dimension": "JP",
+    "trait": "P"
+  },
+  {
+    "id": 17,
+    "text": "그룹 활동과 팀워크를 즐긴다.",
+    "dimension": "EI",
+    "trait": "E"
+  },
+  {
+    "id": 18,
+    "text": "개인적인 취미나 관심사에 집중하는 시간을 좋아한다.",
+    "dimension": "EI",
+    "trait": "I"
+  },
+  {
+    "id": 19,
+    "text": "과거의 경험과 검증된 방법을 신뢰한다.",
+    "dimension": "SN",
+    "trait": "S"
+  },
+  {
+    "id": 20,
+    "text": "미래의 가능성과 새로운 방향을 탐구한다.",
+    "dimension": "SN",
+    "trait": "N"
+  },
+  {
+    "id": 21,
+    "text": "공정성과 객관성을 바탕으로 판단한다.",
+    "dimension": "TF",
+    "trait": "T"
+  },
+  {
+    "id": 22,
+    "text": "사람들의 개인적인 상황과 감정을 고려한다.",
+    "dimension": "TF",
+    "trait": "F"
+  },
+  {
+    "id": 23,
+    "text": "미리 계획을 세우고 준비하는 것을 선호한다.",
+    "dimension": "JP",
+    "trait": "J"
+  },
+  {
+    "id": 24,
+    "text": "상황에 따라 유연하게 대응하는 것을 선호한다.",
+    "dimension": "JP",
+    "trait": "P"
+  },
+  {
+    "id": 25,
+    "text": "외부 활동과 사교 모임을 좋아한다.",
+    "dimension": "EI",
+    "trait": "E"
+  },
+  {
+    "id": 26,
+    "text": "내면의 생각과 감정을 중시한다.",
+    "dimension": "EI",
+    "trait": "I"
+  },
+  {
+    "id": 27,
+    "text": "구체적이고 명확한 정보를 선호한다.",
+    "dimension": "SN",
+    "trait": "S"
+  },
+  {
+    "id": 28,
+    "text": "추상적이고 개념적인 아이디어를 좋아한다.",
+    "dimension": "SN",
+    "trait": "N"
+  },
+  {
+    "id": 29,
+    "text": "논리적 일관성과 합리성을 추구한다.",
+    "dimension": "TF",
+    "trait": "T"
+  },
+  {
+    "id": 30,
+    "text": "인간관계와 감정적 연결을 중시한다.",
+    "dimension": "TF",
+    "trait": "F"
+  },
+  {
+    "id": 31,
+    "text": "결론을 내리고 확정하는 것을 선호한다.",
+    "dimension": "JP",
+    "trait": "J"
+  },
+  {
+    "id": 32,
+    "text": "가능성을 열어두고 탐색하는 것을 선호한다.",
+    "dimension": "JP",
+    "trait": "P"
+  },
+  {
+    "id": 33,
+    "text": "활발한 토론과 의견 교환을 즐긴다.",
+    "dimension": "EI",
+    "trait": "E"
+  },
+  {
+    "id": 34,
+    "text": "신중하게 생각한 후 의견을 표현한다.",
+    "dimension": "EI",
+    "trait": "I"
+  },
+  {
+    "id": 35,
+    "text": "실제 경험과 관찰을 통해 학습한다.",
+    "dimension": "SN",
+    "trait": "S"
+  },
+  {
+    "id": 36,
+    "text": "이론과 개념을 통해 이해한다.",
+    "dimension": "SN",
+    "trait": "N"
+  },
+  {
+    "id": 37,
+    "text": "효율성과 성과를 중시한다.",
+    "dimension": "TF",
+    "trait": "T"
+  },
+  {
+    "id": 38,
+    "text": "협력과 배려를 중시한다.",
+    "dimension": "TF",
+    "trait": "F"
+  },
+  {
+    "id": 39,
+    "text": "체계적이고 조직적인 환경을 선호한다.",
+    "dimension": "JP",
+    "trait": "J"
+  },
+  {
+    "id": 40,
+    "text": "자유롭고 유연한 환경을 선호한다.",
+    "dimension": "JP",
+    "trait": "P"
+  },
+  {
+    "id": 41,
+    "text": "새로운 사람들과 만나는 것을 좋아한다.",
+    "dimension": "EI",
+    "trait": "E"
+  },
+  {
+    "id": 42,
+    "text": "소수의 친한 사람들과 깊은 관계를 유지한다.",
+    "dimension": "EI",
+    "trait": "I"
+  },
+  {
+    "id": 43,
+    "text": "단계별로 차근차근 진행하는 것을 선호한다.",
+    "dimension": "SN",
+    "trait": "S"
+  },
+  {
+    "id": 44,
+    "text": "전체적인 그림과 패턴을 보는 것을 선호한다.",
+    "dimension": "SN",
+    "trait": "N"
+  },
+  {
+    "id": 45,
+    "text": "객관적 기준과 원칙을 적용한다.",
+    "dimension": "TF",
+    "trait": "T"
+  },
+  {
+    "id": 46,
+    "text": "개인의 가치와 신념을 중시한다.",
+    "dimension": "TF",
+    "trait": "F"
+  },
+  {
+    "id": 47,
+    "text": "목표를 설정하고 달성하는 것을 좋아한다.",
+    "dimension": "JP",
+    "trait": "J"
+  },
+  {
+    "id": 48,
+    "text": "과정을 즐기고 경험하는 것을 중시한다.",
+    "dimension": "JP",
+    "trait": "P"
+  },
+  {
+    "id": 49,
+    "text": "말로 표현하며 생각을 정리한다.",
+    "dimension": "EI",
+    "trait": "E"
+  },
+  {
+    "id": 50,
+    "text": "머릿속에서 먼저 생각을 정리한다.",
+    "dimension": "EI",
+    "trait": "I"
+  },
+  {
+    "id": 51,
+    "text": "현재에 집중하고 현실적으로 사고한다.",
+    "dimension": "SN",
+    "trait": "S"
+  },
+  {
+    "id": 52,
+    "text": "미래를 상상하고 비전을 그린다.",
+    "dimension": "SN",
+    "trait": "N"
+  },
+  {
+    "id": 53,
+    "text": "문제 해결에 논리적으로 접근한다.",
+    "dimension": "TF",
+    "trait": "T"
+  },
+  {
+    "id": 54,
+    "text": "사람들의 마음을 이해하려고 노력한다.",
+    "dimension": "TF",
+    "trait": "F"
+  },
+  {
+    "id": 55,
+    "text": "결정을 빨리 내리고 실행에 옮긴다.",
+    "dimension": "JP",
+    "trait": "J"
+  },
+  {
+    "id": 56,
+    "text": "다양한 옵션을 고려하고 선택을 미룬다.",
+    "dimension": "JP",
+    "trait": "P"
+  },
+  {
+    "id": 57,
+    "text": "에너지가 넘치고 활동적이다.",
+    "dimension": "EI",
+    "trait": "E"
+  },
+  {
+    "id": 58,
+    "text": "조용하고 차분한 성격이다.",
+    "dimension": "EI",
+    "trait": "I"
+  },
+  {
+    "id": 59,
+    "text": "사실과 데이터를 기반으로 판단한다.",
+    "dimension": "SN",
+    "trait": "S"
+  },
+  {
+    "id": 60,
+    "text": "직감과 영감을 따라 행동한다.",
+    "dimension": "SN",
+    "trait": "N"
+  }
+]

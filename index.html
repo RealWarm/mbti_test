@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI 성격 유형 테스트</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta name="description" content="정확한 MBTI 성격 유형 테스트로 당신의 성격을 알아보세요">
+</head>
+<body>
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="screen active">
+            <div class="welcome-content">
+                <h1><i class="fas fa-brain"></i> MBTI 성격 유형 테스트</h1>
+                <p class="subtitle">당신의 진짜 성격을 발견해보세요</p>
+                <div class="info-cards">
+                    <div class="info-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>10분 소요</h3>
+                        <p>60개의 간단한 질문</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-chart-pie"></i>
+                        <h3>16가지 유형</h3>
+                        <p>정확한 성격 분석</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-share-alt"></i>
+                        <h3>결과 공유</h3>
+                        <p>친구들과 비교해보세요</p>
+                    </div>
+                </div>
+                <button id="start-test" class="btn btn-primary">
+                    <i class="fas fa-play"></i> 테스트 시작하기
+                </button>
+                <div class="continue-section" id="continue-section" style="display: none;">
+                    <p>이전에 진행하던 테스트가 있습니다.</p>
+                    <button id="continue-test" class="btn btn-secondary">
+                        <i class="fas fa-redo"></i> 이어서 하기
+                    </button>
+                    <button id="restart-test" class="btn btn-outline">
+                        <i class="fas fa-refresh"></i> 새로 시작하기
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Screen -->
+        <div id="test-screen" class="screen">
+            <div class="test-header">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <span class="progress-text" id="progress-text">1 / 60</span>
+                </div>
+                <button id="home-btn" class="btn btn-ghost">
+                    <i class="fas fa-home"></i>
+                </button>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-card">
+                    <h2 id="question-text">질문을 불러오는 중...</h2>
+                    <div class="options">
+                        <button class="option-btn" data-value="strongly-agree">
+                            <i class="fas fa-thumbs-up"></i>
+                            <span>매우 그렇다</span>
+                        </button>
+                        <button class="option-btn" data-value="agree">
+                            <i class="fas fa-check"></i>
+                            <span>그렇다</span>
+                        </button>
+                        <button class="option-btn" data-value="neutral">
+                            <i class="fas fa-minus"></i>
+                            <span>보통이다</span>
+                        </button>
+                        <button class="option-btn" data-value="disagree">
+                            <i class="fas fa-times"></i>
+                            <span>아니다</span>
+                        </button>
+                        <button class="option-btn" data-value="strongly-disagree">
+                            <i class="fas fa-thumbs-down"></i>
+                            <span>전혀 아니다</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button id="prev-btn" class="btn btn-outline" disabled>
+                    <i class="fas fa-arrow-left"></i> 이전
+                </button>
+                <button id="next-btn" class="btn btn-primary" disabled>
+                    다음 <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="screen">
+            <div class="loading-content">
+                <div class="loading-spinner">
+                    <i class="fas fa-brain fa-spin"></i>
+                </div>
+                <h2>결과를 분석하고 있습니다...</h2>
+                <p>당신의 성격 유형을 계산 중입니다</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

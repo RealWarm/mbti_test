@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI 테스트 결과</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div id="result-screen" class="screen active">
+            <div class="result-header">
+                <button id="home-btn" class="btn btn-ghost">
+                    <i class="fas fa-home"></i> 홈으로
+                </button>
+                <button id="share-btn" class="btn btn-outline">
+                    <i class="fas fa-share-alt"></i> 공유하기
+                </button>
+            </div>
+
+            <div class="result-content">
+                <div class="result-card">
+                    <div class="result-type" id="result-type">
+                        <h1 id="mbti-code">ENFP</h1>
+                        <h2 id="mbti-title">활발한 영감가</h2>
+                    </div>
+                    
+                    <div class="result-summary" id="result-summary">
+                        <p>결과를 불러오는 중...</p>
+                    </div>
+
+                    <div class="dimensions">
+                        <h3><i class="fas fa-chart-bar"></i> 성격 차원 분석</h3>
+                        <div class="dimension-bars" id="dimension-bars">
+                            <!-- 동적으로 생성됨 -->
+                        </div>
+                    </div>
+
+                    <div class="strengths-weaknesses">
+                        <div class="strengths">
+                            <h3><i class="fas fa-star"></i> 강점</h3>
+                            <ul id="strengths-list">
+                                <!-- 동적으로 생성됨 -->
+                            </ul>
+                        </div>
+                        <div class="weaknesses">
+                            <h3><i class="fas fa-exclamation-triangle"></i> 개선점</h3>
+                            <ul id="weaknesses-list">
+                                <!-- 동적으로 생성됨 -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="career-relationships">
+                        <div class="career">
+                            <h3><i class="fas fa-briefcase"></i> 적합한 직업</h3>
+                            <div class="career-tags" id="career-tags">
+                                <!-- 동적으로 생성됨 -->
+                            </div>
+                        </div>
+                        <div class="relationships">
+                            <h3><i class="fas fa-heart"></i> 궁합</h3>
+                            <div class="compatibility" id="compatibility">
+                                <!-- 동적으로 생성됨 -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detailed-description">
+                        <h3><i class="fas fa-book"></i> 상세 설명</h3>
+                        <div class="description-content" id="detailed-description">
+                            <!-- 동적으로 생성됨 -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="retake-test" class="btn btn-primary">
+                        <i class="fas fa-redo"></i> 다시 테스트하기
+                    </button>
+                    <button id="save-result" class="btn btn-secondary">
+                        <i class="fas fa-download"></i> 결과 저장하기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // 결과 페이지 전용 스크립트
+        document.addEventListener('DOMContentLoaded', function() {
+            displayResult();
+            
+            document.getElementById('home-btn').addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+
+            document.getElementById('retake-test').addEventListener('click', function() {
+                localStorage.removeItem('mbti_progress');
+                localStorage.removeItem('mbti_answers');
+                window.location.href = 'index.html';
+            });
+
+            document.getElementById('share-btn').addEventListener('click', shareResult);
+            document.getElementById('save-result').addEventListener('click', saveResult);
+        });
+
+        function displayResult() {
+            const result = JSON.parse(localStorage.getItem('mbti_result'));
+            if (!result) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // 결과 표시
+            document.getElementById('mbti-code').textContent = result.type;
+            document.getElementById('mbti-title').textContent = result.title;
+            document.getElementById('result-summary').textContent = result.summary;
+
+            // 결과에 따른 색상 테마 적용
+            document.querySelector('.result-type').className = `result-type ${result.type.toLowerCase()}`;
+
+            // 차원 분석 표시
+            displayDimensions(result.dimensions);
+            
+            // 강점/약점 표시
+            displayStrengthsWeaknesses(result.strengths, result.weaknesses);
+            
+            // 직업/궁합 표시
+            displayCareerCompatibility(result.careers, result.compatibility);
+            
+            // 상세 설명 표시
+            document.getElementById('detailed-description').innerHTML = result.description;
+        }
+
+        function displayDimensions(dimensions) {
+            const container = document.getElementById('dimension-bars');
+            const dimensionLabels = {
+                'E': '외향성',
+                'I': '내향성',
+                'S': '감각',
+                'N': '직관',
+                'T': '사고',
+                'F': '감정',
+                'J': '판단',
+                'P': '인식'
+            };
+
+            Object.entries(dimensions).forEach(([key, value]) => {
+                const bar = document.createElement('div');
+                bar.className = 'dimension-bar';
+                bar.innerHTML = `
+                    <div class="dimension-label">${dimensionLabels[key]}</div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: ${value}%"></div>
+                    </div>
+                    <div class="dimension-value">${value}%</div>
+                `;
+                container.appendChild(bar);
+            });
+        }
+
+        function displayStrengthsWeaknesses(strengths, weaknesses) {
+            const strengthsList = document.getElementById('strengths-list');
+            const weaknessesList = document.getElementById('weaknesses-list');
+
+            strengths.forEach(strength => {
+                const li = document.createElement('li');
+                li.textContent = strength;
+                strengthsList.appendChild(li);
+            });
+
+            weaknesses.forEach(weakness => {
+                const li = document.createElement('li');
+                li.textContent = weakness;
+                weaknessesList.appendChild(li);
+            });
+        }
+
+        function displayCareerCompatibility(careers, compatibility) {
+            const careerContainer = document.getElementById('career-tags');
+            const compatibilityContainer = document.getElementById('compatibility');
+
+            careers.forEach(career => {
+                const tag = document.createElement('span');
+                tag.className = 'career-tag';
+                tag.textContent = career;
+                careerContainer.appendChild(tag);
+            });
+
+            compatibility.forEach(comp => {
+                const compDiv = document.createElement('div');
+                compDiv.className = 'compatibility-item';
+                compDiv.innerHTML = `
+                    <span class="comp-type">${comp.type}</span>
+                    <span class="comp-label">${comp.label}</span>
+                `;
+                compatibilityContainer.appendChild(compDiv);
+            });
+        }
+
+        async function shareResult() {
+            const result = JSON.parse(localStorage.getItem('mbti_result'));
+            const shareData = {
+                title: `MBTI 테스트 결과: ${result.type} - ${result.title}`,
+                text: `나의 MBTI 성격 유형은 ${result.type}입니다!`,
+                url: window.location.href
+            };
+
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    copyToClipboard(shareData.url);
+                }
+            } else {
+                copyToClipboard(shareData.url);
+            }
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('링크가 클립보드에 복사되었습니다!');
+            }).catch(() => {
+                // 폴백: 텍스트 선택 방식
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('링크가 클립보드에 복사되었습니다!');
+            });
+        }
+
+        function saveResult() {
+            const result = JSON.parse(localStorage.getItem('mbti_result'));
+            const resultText = `
+MBTI 성격 유형 테스트 결과
+
+성격 유형: ${result.type} - ${result.title}
+
+요약: ${result.summary}
+
+강점:
+${result.strengths.map(s => `• ${s}`).join('\n')}
+
+개선점:
+${result.weaknesses.map(w => `• ${w}`).join('\n')}
+
+적합한 직업:
+${result.careers.join(', ')}
+
+테스트 날짜: ${new Date().toLocaleDateString()}
+            `;
+
+            const blob = new Blob([resultText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `MBTI_결과_${result.type}_${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
